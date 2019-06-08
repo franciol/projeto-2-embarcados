@@ -10,6 +10,20 @@
 	"-- "BOARD_NAME " --"STRING_EOL	\
 	"-- Compiled: "__DATE__ " "__TIME__ " --"STRING_EOL
 
+
+#define BUZZ_PIO           PIOD
+#define BUZZ_PIO_ID        ID_PIOD
+#define BUZZ_PIO_IDX       26u
+#define BUZZ_PIO_IDX_MASK (1u << BUZZ_PIO_IDX)
+
+#define BUT_PIO           PIOA
+#define BUT_PIO_ID        10
+#define BUT_PIO_IDX       11u
+#define BUT_PIO_IDX_MASK  (1u << BUT_PIO_IDX)
+
+SemaphoreHandle_t xSemaphore;
+
+
 /** IP address of host. */
 uint32_t gu32HostIp = 0;
 
@@ -39,6 +53,8 @@ static char server_host_name[] = MAIN_SERVER_NAME;
 
 #define TASK_WIFI_STACK_SIZE            (4096/sizeof(portSTACK_TYPE))
 #define TASK_WIFI_STACK_PRIORITY        (tskIDLE_PRIORITY)
+#define TASK_BUZZER_STACK_SIZE          (4096/sizeof(portSTACK_TYPE))
+#define TASK_BUZZER_STACK_PRIORITY      (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
 signed char *pcTaskName);
@@ -331,6 +347,23 @@ static void task_monitor(void *pvParameters)
 	}
 }
 
+static void task_buzzer(void *pvParameters) {
+	xSemaphore = xSemaphoreCreateBinary();
+	if (xSemaphore == NULL)
+	printf("falha em criar o semaforo \n");
+	
+	pio_set_output(BUZZ_PIO, BUZZ_PIO_IDX_MASK, 0, 0, 0);
+	for (;;) {
+		if( xSemaphoreTake(xSemaphore, ( TickType_t ) 500) == pdTRUE ){
+			pio_clear(PIOC, BUZZ_PIO_IDX_MASK);
+			vTaskDelay((TickType_t)1000/portTICK_PERIOD_MS);
+			pio_set(PIOC, BUZZ_PIO_IDX_MASK);
+			;
+		}
+	}
+
+	
+}
 
 
 static void task_wifi(void *pvParameters) {
@@ -396,6 +429,7 @@ static void task_wifi(void *pvParameters) {
 	  }
 	  }
 }
+
 /**
  * \brief Main application function.
  *
@@ -405,6 +439,7 @@ static void task_wifi(void *pvParameters) {
  */
 int main(void)
 {
+	
 	/* Initialize the board. */
 	sysclk_init();
 	board_init();
@@ -417,6 +452,11 @@ int main(void)
 	if (xTaskCreate(task_wifi, "Wifi", TASK_WIFI_STACK_SIZE, NULL,
 	TASK_WIFI_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create Wifi task\r\n");
+	}
+	
+	if (xTaskCreate(task_buzzer, "buzzer", TASK_BUZZER_STACK_SIZE, NULL,
+	TASK_BUZZER_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create Buzzer task\r\n");
 	}
 
 	vTaskStartScheduler();
