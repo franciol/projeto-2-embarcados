@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ASF\sam\drivers\rtt\rtt.c
+
 src\ASF\thirdparty\freertos\freertos-8.2.3\Source\croutine.c
 
 src\ASF\thirdparty\freertos\freertos-8.2.3\Source\event_groups.c

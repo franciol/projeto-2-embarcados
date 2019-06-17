@@ -14,7 +14,7 @@ todos = {}
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Hello Wrld!\r\n"
 
 @app.route("/512",methods=["GET"])
 def send512():

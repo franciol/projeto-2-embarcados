@@ -43,6 +43,7 @@
           <option id="sam.drivers.spi" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.tc" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.os.freertos.version" value="Add" config="8.2.3" content-id="Atmel.ASF" />
+          <option id="sam.drivers.rtt" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.applications.getting-started" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.utils.cmsis.same70.source.template" value="Add" config="" content-id="Atmel.ASF" />
         </options>
@@ -315,6 +316,8 @@
           <file path="src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1/port.c" framework="" version="3.32.0" source="thirdparty\freertos\freertos-8.2.3\Source\portable\GCC\ARM_CM7\r0p1\port.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h" framework="" version="3.32.0" source="thirdparty\freertos\freertos-8.2.3\Source\portable\GCC\ARM_CM7\r0p1\portmacro.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/MemMang/heap_1.c" framework="" version="3.32.0" source="thirdparty\freertos\freertos-8.2.3\Source\portable\MemMang\heap_1.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/rtt/rtt.c" framework="" version="3.34.1" source="sam\drivers\rtt\rtt.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/rtt/rtt.h" framework="" version="3.34.1" source="sam\drivers\rtt\rtt.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.32.0/sam.applications.getting-started.same70_xplained/html/index.html" />
         <offline-documentation help="" />
@@ -398,6 +401,7 @@
       <Value>../src/ASF/sam/drivers/spi</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/include</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -453,6 +457,7 @@
       <Value>../src/ASF/sam/drivers/spi</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/include</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM7=true -DBOARD=SAME70_XPLAINED -D__SAME70Q21__ -Dprintf=iprintf -Dscanf=iscanf -D__FREERTOS__</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -491,6 +496,7 @@
       <Value>../src/ASF/sam/drivers/spi</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/include</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -550,6 +556,7 @@
       <Value>../src/ASF/sam/drivers/spi</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/include</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -606,6 +613,7 @@
       <Value>../src/ASF/sam/drivers/spi</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/include</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -645,6 +653,7 @@
       <Value>../src/ASF/sam/drivers/spi</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/include</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -700,6 +709,7 @@
     <Folder Include="src\ASF\sam\drivers\mpu\" />
     <Folder Include="src\ASF\sam\drivers\pio\" />
     <Folder Include="src\ASF\sam\drivers\pmc\" />
+    <Folder Include="src\ASF\sam\drivers\rtt\" />
     <Folder Include="src\ASF\sam\drivers\spi\" />
     <Folder Include="src\ASF\sam\drivers\tc\" />
     <Folder Include="src\ASF\sam\drivers\twihs\" />
@@ -742,6 +752,12 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ASF\sam\drivers\rtt\rtt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\rtt\rtt.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\thirdparty\freertos\freertos-8.2.3\Source\croutine.c">
       <SubType>compile</SubType>
     </Compile>
